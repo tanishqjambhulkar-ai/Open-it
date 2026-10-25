@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#11152e">
+<title>Happy Birthday, Meet! 💗</title>
+<style>
+:root{--night:#11152e;--night2:#24254b;--gold:#f7d99a;--pink:#ffd8e7;--ink:#49354b;--paper:#fff9f1}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{font-family:Georgia,"Times New Roman",serif;background:var(--night);color:#fff}
+button{font:inherit;cursor:pointer;border:0}
+.page{position:absolute;inset:0;display:none;overflow:hidden;padding:24px 18px 30px;align-items:center;justify-content:center;text-align:center;background:radial-gradient(ellipse at 50% 15%,#34335f 0%,var(--night) 65%);isolation:isolate}
+.page.active{display:flex;animation:pageIn .75s ease both}
+@keyframes pageIn{from{opacity:0;transform:scale(1.025)}to{opacity:1;transform:scale(1)}}
+.stars,.stars:before,.stars:after{position:absolute;inset:0;pointer-events:none;content:"";background-image:radial-gradient(2px 2px at 12% 18%,#fff 45%,transparent 60%),radial-gradient(1px 1px at 80% 23%,#ffe6ac 45%,transparent 60%),radial-gradient(2px 2px at 65% 78%,#fff 45%,transparent 60%),radial-gradient(1px 1px at 25% 72%,#ffe6ac 45%,transparent 60%),radial-gradient(1px 1px at 90% 60%,#fff 45%,transparent 60%);animation:twinkle 4s ease-in-out infinite alternate}
+.stars:before{transform:translate(22px,15px) scale(.8);opacity:.6}.stars:after{transform:translate(-12px,-20px) scale(1.2);opacity:.45}
+@keyframes twinkle{to{opacity:.4}}
+.content{position:relative;z-index:2;width:min(100%,560px);max-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
+.eyebrow{letter-spacing:.22em;text-transform:uppercase;font:11px Arial,sans-serif;color:var(--gold)}
+h1{font-size:clamp(34px,9vw,56px);line-height:1.06;margin:0;color:#fff1d3;font-weight:normal;text-shadow:0 0 24px #f6d99a35}
+h2{font-size:clamp(27px,7vw,39px);font-weight:normal;margin:0;color:#fff1d3}
+p{line-height:1.65;margin:0}
+.subtitle{color:#e7dff7;font-size:16px}
+.btn{padding:13px 22px;border-radius:999px;background:linear-gradient(135deg,#ffe5ad,#f4c9df);color:#352746;box-shadow:0 8px 24px #0003;font:600 14px Arial,sans-serif;transition:transform .2s}
+.btn:active{transform:scale(.96)}
+.btn.secondary{background:#ffffff15;color:#fff;border:1px solid #ffffff45;box-shadow:none}
+.btnrow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:5px}
+.bear-row{display:flex;align-items:center;justify-content:center;gap:15px;min-height:115px}
+.bear{font-family:system-ui,sans-serif;font-size:clamp(60px,17vw,95px);display:inline-block;filter:drop-shadow(0 10px 10px #0003);animation:bob 3s ease-in-out infinite}
+.bear:nth-child(2){animation-delay:.7s}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-9px) rotate(3deg)}}
+.heart{position:absolute;color:#ffb6d2;opacity:.75;animation:float 8s linear infinite;pointer-events:none}
+@keyframes float{from{transform:translateY(110vh) rotate(0);opacity:0}15%{opacity:.8}to{transform:translateY(-15vh) rotate(30deg);opacity:0}}
+.envelope-wrap{width:min(78vw,330px);height:220px;position:relative;margin:10px auto 0;perspective:900px}
+.envelope{position:absolute;inset:35px 0 0;background:#d9b9c9;border-radius:8px;box-shadow:0 18px 35px #0004;overflow:visible}
+.env-front{position:absolute;inset:0;background:linear-gradient(145deg,#f7dce7,#d9b5ca);clip-path:polygon(0 0,50% 57%,100% 0,100% 100%,0 100%);z-index:4;border-radius:8px}
+.env-flap{position:absolute;left:0;top:0;width:100%;height:120px;background:#ffeaf1;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;z-index:5;transition:transform 1.15s ease}
+.seal{position:absolute;z-index:6;left:50%;top:84px;transform:translateX(-50%);width:38px;height:38px;border-radius:50%;background:#b66d85;color:white;display:grid;place-items:center;box-shadow:0 3px 8px #79425766}
+.letter-sheet{position:absolute;left:7%;width:86%;top:15px;height:188px;overflow:hidden;padding:15px 12px;background:var(--paper);color:var(--ink);border-radius:4px;z-index:2;transition:transform 1.5s ease,top 1.5s ease;box-shadow:0 4px 12px #0002;font-size:13px;line-height:1.35}
+.envelope.open .env-flap{transform:rotateX(180deg);z-index:1}
+.envelope.open .seal{opacity:0;transition:opacity .2s}
+.envelope.open .letter-sheet{top:-145px;transform:translateY(-5px);height:auto;max-height:380px;overflow:auto;z-index:7;padding:18px 16px;font-size:14px;line-height:1.55}
+.envelope.open{margin-top:150px}
+.letter-instruction{font:12px Arial,sans-serif;color:#f4dbe8}
+.letter-page .content{justify-content:flex-start;padding-top:5px;overflow:visible}
+.letter-page h2{font-size:clamp(25px,6vw,34px)}
+.letter-page .envelope-wrap{flex-shrink:0;margin-top:0}
+.letter-page .letter-sheet p{text-align:left;margin:0 0 10px}
+.paper-card{background:var(--paper);color:var(--ink);border-radius:18px;padding:22px 20px;box-shadow:0 15px 45px #0004;width:min(100%,470px);max-height:60vh;overflow:auto}
+.paper-card p{text-align:left;font-size:15px}
+.apology{background:radial-gradient(ellipse at 50% 15%,#ffedf4 0%,#f7d7e7 60%,#d9c5ef 100%);color:#6d405d}
+.apology h2{color:#9d5577}
+.apology .subtitle{color:#7b5872}
+.apology .eyebrow{color:#9d5577}
+.apology .bear{font-size:clamp(80px,23vw,125px);animation:sadBob 3.5s ease-in-out infinite}
+@keyframes sadBob{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(4px) rotate(4deg)}}
+.note{width:min(100%,430px);background:#fffafd;color:#754e68;border:1px solid #fff;border-radius:18px;padding:20px;box-shadow:0 12px 30px #986b8a20;font-size:15px;line-height:1.7}
+.pop{position:fixed;z-index:99;left:50%;bottom:22px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#fff5fb;color:#794763;border-radius:999px;padding:11px 17px;font:13px Arial,sans-serif;box-shadow:0 8px 28px #0002;transition:.3s;white-space:nowrap;max-width:90vw}
+.pop.show{opacity:1;transform:translate(-50%,0)}
+.confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.confetti span{position:absolute;top:-20px;animation:fall 4s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:0}}
+.music-label{position:absolute;z-index:5;top:14px;right:14px;font:11px Arial,sans-serif;color:#e6d5f1;background:#ffffff12;padding:8px 10px;border:1px solid #ffffff24;border-radius:20px}
+@media(max-height:700px){.content{gap:10px}.bear-row{min-height:80px}.envelope-wrap{height:190px}.letter-page .content{padding-top:0}.paper-card{max-height:55vh;padding:16px}.letter-page .envelope.open{margin-top:130px}}
+</style>
+</head>
+<body>
+<div class="music-label" id="musicLabel">♫ music starts on tap</div>
+<div class="pop" id="pop">A little heart for you 💗</div>
+
+<section class="page active" id="p1">
+  <div class="stars"></div>
+  <div class="content">
+    <div class="eyebrow">a little universe made for you</div>
+    <div class="bear-row"><span class="bear">🐻‍❄️</span><span style="font-size:25px;color:#ffd2e5">♥</span><span class="bear">🐻</span></div>
+    <h1>Happy Birthday,<br>Meet! ✨</h1>
+    <p class="subtitle">A little surprise, made with all my heart.</p>
+    <p style="font-size:13px;color:#d8cce8">For my favourite person, Pagala 💗</p>
+    <button class="btn" onclick="go(2,'Your surprise is waiting 💌')">Open your surprise ✨</button>
+  </div>
+</section>
+
+<section class="page" id="p2">
+  <div class="stars"></div>
+  <div class="content">
+    <div class="eyebrow">just for you</div>
+    <div class="bear-row"><span class="bear">🐻‍❄️</span><span class="bear">🐻</span></div>
+    <h2>A little letter, sealed with love</h2>
+    <p class="subtitle">Some feelings deserve their own little envelope.</p>
+    <button class="btn" onclick="go(3,'The letter is next 💌')">See your letter 💌</button>
+    <button class="btn secondary" onclick="go(1,'Back to the birthday ✨')">Go back</button>
+  </div>
+</section>
+
+<section class="page letter-page" id="p3">
+  <div class="stars"></div>
+  <div class="content">
+    <div class="eyebrow">open when you're ready</div>
+    <h2>A letter from my heart 💌</h2>
+    <div class="envelope-wrap">
+      <div class="envelope" id="envelope">
+        <div class="letter-sheet">
+          <p><strong>Some Birthdays Were Happy, Some Were Sad…</strong></p>
+          <p>Some birthdays were happy, and some were a little sad, because we couldn't be together on your special day.</p>
+          <p>Some birthdays became very special to me, while others carried a little sadness in my heart, because I couldn't hug you, run towards you, or be there beside you when you needed me. I couldn't be there physically, but I was always there with you digitally — through your phone, our calls, and our messages. Even if I couldn't hold your hand, I hope you could still feel my love reaching you.</p>
+          <p>I want you to know that I will always love you. ❤️</p>
+          <p>Even when I cannot run to see you, even when I cannot meet you on your very special day, and even when I cannot give you a gift with my own hands, I'll still try my best to give you something meaningful.</p>
+          <p>I'll try to make you smile. I'll try to make your day feel a little more special. And even if I cannot make the entire day as beautiful as I wish it could be, I'll never stop trying to bring a little happiness to your face.</p>
+          <p>Because, sometimes, love isn't about being physically present or giving the most expensive gifts. Sometimes, it's about finding little ways to reach someone's heart, even from far away.</p>
+          <p>And that's what I want to do for you — to remind you that distance cannot stop me from caring, and being apart cannot make me love you any less.</p>
+          <p><strong>Even when I cannot be beside you on your special day, a part of my heart will always be right there with you. ❤️</strong></p>
+        </div>
+        <div class="env-flap"></div><div class="seal">♥</div><div class="env-front"></div>
+      </div>
+    </div>
+    <p class="letter-instruction" id="letterInstruction">Tap the envelope to open it slowly 💗</p>
+    <button class="btn" id="openLetter" onclick="openEnvelope()">Open the envelope ✉️</button>
+    <div class="btnrow"><button class="btn secondary" onclick="go(2,'Back to the envelope page 💗')">Back</button><button class="btn" onclick="go(4,'One last little surprise 🥺')">Continue ✨</button></div>
+  </div>
+</section>
+
+<section class="page" id="p4">
+  <div class="stars"></div>
+  <div class="content">
+    <div class="eyebrow">a little more love</div>
+    <div class="bear-row"><span class="bear">🐻‍❄️</span><span style="font-size:27px">💕</span><span class="bear">🐻</span></div>
+    <h2>Far away, but close at heart</h2>
+    <p class="subtitle">If I could, I'd run straight to you and give you the biggest hug.</p>
+    <p style="font-size:14px;color:#f4dce9">So here's a tiny bit of love until that day comes. 💗</p>
+    <button class="btn" onclick="go(5,'A little apology from my heart 🥺')">One last thing… 🥺</button>
+    <button class="btn secondary" onclick="go(3,'Your letter is always here 💌')">Read the letter again</button>
+  </div>
+</section>
+
+<section class="page apology" id="p5">
+  <div class="content">
+    <div class="eyebrow">for you, Pagala</div>
+    <div class="bear-row"><span class="bear">🥺</span></div>
+    <h2>I'm sorry, Pagala…</h2>
+    <p class="subtitle">A tiny face with a very big sorry.</p>
+    <div class="note">
+      <strong>A little note from my heart 💌</strong><br><br>
+      I'm sorry I couldn't be there to hug you on your special day. 🥺 I wish I could run straight into your arms. Until I can, I'll keep finding little ways to make you smile. ❤️
+    </div>
+    <div class="bear-row" style="min-height:65px"><span class="bear" style="font-size:54px">🐻‍❄️</span><span style="font-size:23px">💗</span><span class="bear" style="font-size:54px">🐻</span></div>
+    <p style="color:#9d5577;font-size:14px">Even from far away, I'm sending you all my love.</p>
+    <button class="btn" onclick="hearts();showPop('A tiny kiss for you 😚💗')">Send a little kiss 😚</button>
+    <button class="btn secondary" onclick="go(1,'Happy Birthday, Meet! 🎂')">Start again ↺</button>
+  </div>
+  <div class="confetti" id="confetti"></div>
+</section>
+
+<script>
+let audioCtx=null, musicTimer=null, noteIndex=0, musicStarted=false;
+const melody=[523.25,659.25,783.99,659.25,587.33,698.46,783.99,698.46,523.25,587.33,659.25,523.25,440,523.25,659.25,587.33];
+function tone(freq,duration,when,volume=.035,type='sine'){
+  if(!audioCtx)return;
+  const osc=audioCtx.createOscillator(), gain=audioCtx.createGain();
+  osc.type=type;osc.frequency.value=freq;gain.gain.setValueAtTime(.0001,when);
+  gain.gain.exponentialRampToValueAtTime(volume,when+.08);
+  gain.gain.exponentialRampToValueAtTime(.0001,when+duration);
+  osc.connect(gain);gain.connect(audioCtx.destination);osc.start(when);osc.stop(when+duration+.03);
+}
+function startMusic(){
+  if(musicStarted)return;
+  try{
+    audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+    if(audioCtx.state==='suspended')audioCtx.resume();
+    musicStarted=true;document.getElementById('musicLabel').textContent='♫ soft music playing';
+    let t=audioCtx.currentTime+.1;
+    musicTimer=setInterval(()=>{
+      if(!audioCtx)return;
+      const f=melody[noteIndex%melody.length];
+      tone(f,1.45,audioCtx.currentTime,.022,'sine');
+      if(noteIndex%4===0)tone(f/2,1.8,audioCtx.currentTime,.012,'triangle');
+      noteIndex++;
+    },760);
+  }catch(e){document.getElementById('musicLabel').textContent='♫ music unavailable';}
+}
+function tapSound(){
+  startMusic();
+  if(audioCtx){let t=audioCtx.currentTime;tone(880,.16,t,.025,'sine');tone(1174.66,.2,t+.07,.018,'sine');}
+  if(navigator.vibrate)try{navigator.vibrate(22)}catch(e){}
+}
+function showPop(msg){const p=document.getElementById('pop');p.textContent=msg;p.classList.add('show');clearTimeout(window.popTimer);window.popTimer=setTimeout(()=>p.classList.remove('show'),1800)}
+function go(n,msg){
+  tapSound();
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('p'+n).classList.add('active');
+  if(msg)showPop(msg);
+  if(n===5)hearts();
+}
+function openEnvelope(){
+  tapSound();
+  const env=document.getElementById('envelope');
+  if(!env.classList.contains('open')){
+    env.classList.add('open');
+    document.getElementById('letterInstruction').textContent='Your letter is opening… take your time 💗';
+    document.getElementById('openLetter').textContent='Letter opened 💌';
+    showPop('A letter, just for you 💗');
+  }else showPop('Read every word slowly 💌');
+}
+function hearts(){
+  const page=document.querySelector('.page.active');
+  for(let i=0;i<12;i++){
+    const h=document.createElement('span');h.className='heart';h.textContent=['♥','♡','💗','✦'][Math.floor(Math.random()*4)];
+    h.style.left=Math.random()*95+'%';h.style.bottom='-20px';h.style.animationDuration=(5+Math.random()*5)+'s';h.style.fontSize=(13+Math.random()*20)+'px';page.appendChild(h);setTimeout(()=>h.remove(),10000);
+  }
+}
+document.addEventListener('click',e=>{
+  if(e.target.closest('button')){const b=e.target.closest('button');if(!b.dataset.noPop && !['openLetter'].includes(b.id) && !b.textContent.includes('Send a little kiss')){}}
+});
+document.addEventListener('pointerdown',()=>{if(!musicStarted)startMusic()},{once:true});
+setInterval(()=>{
+  const active=document.querySelector('.page.active');
+  if(!active||active.id==='p5')return;
+  const h=document.createElement('span');h.className='heart';h.textContent=['♡','♥','✦'][Math.floor(Math.random()*3)];
+  h.style.left=Math.random()*94+'%';h.style.bottom='-25px';h.style.animationDuration=(7+Math.random()*5)+'s';h.style.fontSize=(12+Math.random()*12)+'px';active.appendChild(h);setTimeout(()=>h.remove(),12000);
+},1900);
+</script>
+</body>
+</html>
